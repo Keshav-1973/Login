@@ -1,19 +1,31 @@
 //import liraries
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, Linking} from 'react-native';
+import {View, Text, StyleSheet, Linking, Modal, Pressable} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import CheckBox from '@react-native-community/checkbox';
 import {
   CustomButton,
-  UserDataView,
+  // UserDataView,
   TitleDescView,
   TitleView,
   DropDownMenu,
+  CustomCheckBox,
+  CustomModal,
+  ModalButton,
+  FormField,
 } from '../src/components/MyComponents';
+import {formData} from '../src/components/formdata';
+import * as Strings from '../src/components/Strings';
 
 // create a component
 const SignUpComp = () => {
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
+  const [formValues, handleFormValueChange, setFormValues] = formData({
+    FirstName: '',
+    LastName: '',
+    Email: '',
+    MobileNumber: '',
+  });
+  console.log(formValues);
+
   return (
     <View
       style={{
@@ -33,10 +45,9 @@ const SignUpComp = () => {
             height: '50%',
             width: '80%',
             alignItems: 'center',
-
             justifyContent: 'flex-end',
           }}>
-          <TitleView Text="Become a SolaX member" fntWeight="bold" />
+          <TitleView Text={Strings.BECOME_A_SOLAX_MEMBER} fntWeight="bold" />
         </View>
         <View
           style={{
@@ -47,21 +58,41 @@ const SignUpComp = () => {
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <TitleDescView Text="Create your SalaX account and get access to dashboard, analytics and lot more" />
+          <TitleDescView
+            Text={
+              Strings.Create_Your_SolaX_Account_And_Get_Access_To_Dashboard_Analytics_And_More
+            }
+          />
         </View>
       </View>
       <View
         style={{
           height: '50%',
-          width: '100%',
+          width: '93%',
           alignItems: 'center',
           // backgroundColor: 'yellow',
           justifyContent: 'space-evenly',
         }}>
-        <UserDataView Text="First Name*" />
-        <UserDataView Text="Last Name*" />
-        <UserDataView Text="Email*" />
-        <UserDataView Text="Mobile Number" />
+        <FormField
+          label={Strings.FIRST_NAME}
+          formKey="FirstName"
+          handleFormValueChange={handleFormValueChange}
+        />
+        <FormField
+          label={Strings.LAST_NAME}
+          formKey="LastName"
+          handleFormValueChange={handleFormValueChange}
+        />
+        <FormField
+          label={Strings.EMAIL}
+          formKey="Email"
+          handleFormValueChange={handleFormValueChange}
+        />
+        <FormField
+          label={Strings.MOBILE_NUMBER}
+          formKey="MobileNumber"
+          handleFormValueChange={handleFormValueChange}
+        />
       </View>
       <View
         style={{
@@ -78,16 +109,10 @@ const SignUpComp = () => {
             marginTop: '5%',
             alignItems: 'center',
           }}>
-          <CheckBox
-            onFillColor="black"
-            tintColors={{true: 'black'}}
-            disabled={false}
-            value={toggleCheckBox}
-            onValueChange={newValue => setToggleCheckBox(newValue)}
-          />
+          <CustomCheckBox />
           <View style={{marginLeft: 12}}>
             <Text style={{flexShrink: 1, fontFamily: 'Muli'}}>
-              By Creating an account you agree to our
+              {Strings.By_Creating_An_Account_You_Agree_To_Our}
             </Text>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Text
@@ -97,9 +122,9 @@ const SignUpComp = () => {
                   textDecorationLine: 'underline',
                 }}
                 onPress={() => Linking.openURL('http://google.com')}>
-                Terms of Service
+                {Strings.TERMS_OF_SERVIVE}
               </Text>
-              <Text> and </Text>
+              <Text> {Strings.AND} </Text>
               <Text
                 style={{
                   flexShrink: 1,
@@ -107,17 +132,18 @@ const SignUpComp = () => {
                   textDecorationLine: 'underline',
                 }}
                 onPress={() => Linking.openURL('http://google.com')}>
-                Privacy Policy
+                {Strings.PRIVACY_POLICY}
               </Text>
             </View>
           </View>
         </View>
         <View style={{width: '100%', marginTop: '5%'}}>
-          <CustomButton
-            Text="Next"
+          <ModalButton
+            Text={Strings.NEXT}
             btnColor="black"
             txtColor="white"
             screenName="Verification"
+            handleOnPress={true}
           />
         </View>
       </View>

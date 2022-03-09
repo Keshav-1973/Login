@@ -8,6 +8,7 @@ import SignUpComp from './Screens/SignUp';
 import Verification from './Screens/Verification';
 import IntroComp from './Screens/Slider';
 import HomeScreen from './Screens/Home';
+import SignInComp from './Screens/SignIn';
 
 // create a component
 const App = () => {
@@ -21,6 +22,8 @@ const App = () => {
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="IntroComp" component={IntroComp} />
         <Stack.Screen name="SignUpComp" component={SignUpComp} />
+        <Stack.Screen name="SignInComp" component={SignInComp} />
+
         <Stack.Screen name="Verification" component={Verification} />
       </Stack.Navigator>
     </NavigationContainer>

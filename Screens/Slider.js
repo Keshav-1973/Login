@@ -4,6 +4,8 @@ import {View, Text, StyleSheet} from 'react-native';
 import {propTypes} from 'react-native-page-control';
 import IntroSlider from '../src/components/IntroSlider';
 import {CustomButton} from '../src/components/MyComponents';
+import {useNavigation} from '@react-navigation/native';
+import * as Strings from '../src/components/Strings';
 
 // create a component
 const IntroComp = () => {
@@ -22,15 +24,16 @@ const IntroComp = () => {
             // backgroundColor: 'violet',
           }}>
           <CustomButton
-            Text="Create an account"
+            Text={Strings.CREATE_AN_ACCOUNT}
             btnColor="black"
             txtColor="white"
             screenName="SignUpComp"
           />
           <CustomButton
-            Text="Already have an account ? Sign in"
+            Text={Strings.ALREADY_HAVE_AN_ACCOUNT_SIGN_IN}
             btnColor="white"
             txtColor="black"
+            screenName="SignInComp"
           />
         </View>
       </View>

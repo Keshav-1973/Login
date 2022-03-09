@@ -67,7 +67,7 @@ const IntroSlider = () => {
     <>
       {showRealApp ? (
         <SafeAreaView style={styles.container}>
-          <View style={styles.container}>
+          {/* <View style={styles.container}>
             <Text style={styles.titleStyle}>
               React Native App Intro Slider using AppIntroSlider
             </Text>
@@ -79,14 +79,13 @@ const IntroSlider = () => {
               title="Show Intro Slider again"
               onPress={() => setShowRealApp(false)}
             />
-          </View>
+          </View> */}
         </SafeAreaView>
       ) : (
         <AppIntroSlider
           data={slides}
           renderItem={RenderItem}
           onDone={onDone}
-          showSkipButton={true}
           onSkip={onSkip}
           dotStyle={{backgroundColor: 'gray'}}
           activeDotStyle={{backgroundColor: 'black'}}

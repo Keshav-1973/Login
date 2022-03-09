@@ -1,12 +1,13 @@
 //import liraries
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import OtpComp from '../src/components/OtpView';
 import {
   CustomButton,
   TitleDescView,
   TitleView,
 } from '../src/components/MyComponents';
+import * as Strings from '../src/components/Strings';
+import OTPComp from '../src/components/OTPComp';
 
 // create a component
 const Verification = () => {
@@ -31,7 +32,7 @@ const Verification = () => {
             justifyContent: 'flex-end',
             // marginVertical: '6%',
           }}>
-          <TitleView Text="Verify your email" />
+          <TitleView Text={Strings.VERIFY_YOUR_EMAIL} />
         </View>
         <View
           style={{
@@ -42,17 +43,17 @@ const Verification = () => {
             justifyContent: 'center',
             // flexShrink: 1,
           }}>
-          <TitleDescView Text="For security reasons, we have sent you a 6 digit passsword on your email address" />
+          <TitleDescView
+            Text={
+              Strings.FOR_SECURITY_REASONS_WE_HAVE_SENT_YOU_A_6_DIGIT_PASSWORD_ON_YOUR_EMAIL_ADDRESS
+            }
+          />
         </View>
       </View>
       <View
         style={{
-          // backgroundColor: 'red',
           width: '100%',
-          // height: '40%',
-          //   justifyContent: 'center',
-          //alignItems: 'flex-start',
-          //   flexDirection: 'column',
+
           alignItems: 'center',
           flex: 2,
           marginTop: '20%',
@@ -62,17 +63,10 @@ const Verification = () => {
             //  backgroundColor: 'violet',
             width: '90%',
             height: '100%',
-            // marginLeft: 10,
           }}>
           <View
             style={{
-              // height: '20%',
-              // backgroundColor: 'yellow',
-              //  alignItems: 'baseline',
-              //flexDirection: 'row',
               justifyContent: 'flex-end',
-              // paddingTop: '7%',
-              // flexShrink: 1,
             }}>
             <Text
               style={{
@@ -80,7 +74,7 @@ const Verification = () => {
 
                 fontSize: 15,
               }}>
-              Enter Code
+              {Strings.ENTER_CODE}
             </Text>
           </View>
           <View
@@ -89,7 +83,8 @@ const Verification = () => {
               height: '25%',
               alignItems: 'flex-start',
             }}>
-            <OtpComp />
+            {/* <OtpComp /> */}
+            <OTPComp />
           </View>
           <View
             style={{
@@ -98,18 +93,20 @@ const Verification = () => {
               marginTop: 20,
             }}>
             <Text style={{fontFamily: 'Muli'}}>
-              Didn't recieve the email? Dont forget to check your spam folder
+              {
+                Strings.DIDNT_RECIEVE_THE_EMAIL_DONT_FORGET_TO_CHECK_YOUR_SPAM_FOLDER
+              }
             </Text>
           </View>
           <View
             style={{
-              // width: '100%',
-              // height: '80%',
-              //   backgroundColor: 'pink',
-              // alignSelf: 'center',
               marginTop: 45,
             }}>
-            <CustomButton Text="Continue" btnColor="black" txtColor="white" />
+            <CustomButton
+              Text={Strings.CONTINUE}
+              btnColor="black"
+              txtColor="white"
+            />
           </View>
         </View>
       </View>
