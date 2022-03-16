@@ -52,8 +52,8 @@ export const FormField = props => {
       <TextInput
         placeholder={props.placeholder}
         style={styles.formFieldText}
-        onEndEditing={event =>
-          props.handleFormValueChange(props.formKey, event.nativeEvent.text)
+        onChangeText={text =>
+          props.handleFormValueChange(props.formKey, text)
         }
         {...props.textInputProps}
       />

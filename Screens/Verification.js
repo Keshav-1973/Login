@@ -56,11 +56,11 @@ const Verification = () => {
           width: '100%',
           alignItems: 'center',
           flex: 3,
-          // backgroundColor: 'pink'
+          //  backgroundColor: 'pink'
         }}>
         <View
           style={{
-            width:'90%'
+            width:'90%',
           }}>
           <View
             style={{
@@ -82,7 +82,6 @@ const Verification = () => {
             <Text
               style={{
                 fontFamily: 'Muli-Bold',
-
                 fontSize: 15,
               }}>
               {Strings.ENTER_CODE}
@@ -90,7 +89,6 @@ const Verification = () => {
           </View>
           <View
             style={{
-              // backgroundColor: 'green',
               height: 50,
               width: '100%',
               alignItems: 'flex-start',

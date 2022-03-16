@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, { useState, useRef } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -7,6 +7,7 @@ import {
   TextInput,
   Pressable,
   Keyboard,
+  ScrollView
 } from 'react-native';
 
 const CODE_LENGTH = 6;
@@ -18,16 +19,14 @@ const OTPComp = (props) => {
 
 
 
- const otpFilled = otpValue => {
-   console.log(otpValue)
+  const otpFilled = otpValue => {
+    console.log(otpValue)
     setCode(otpValue);
     props.childToParent(otpValue);
- }
+  }
 
 
- 
-
-  const ref = useRef(null);
+  const ref = useRef();
 
   const handleOnPress = () => {
     setContainerIsFocused(true);
@@ -37,8 +36,7 @@ const OTPComp = (props) => {
   const handleOnBlur = () => {
     setContainerIsFocused(false);
   };
-  // Keyboard.addListener('keyboardDidShow', Keyboard.dismiss());
-  // console.log(Keyboard);
+
 
   const toDigitInput = (_value, idx) => {
     const emptyInputChar = ' ';
@@ -52,7 +50,7 @@ const OTPComp = (props) => {
 
     const containerStyle =
       containerIsFocused && isFocused
-        ? {...style.inputContainer, ...style.inputContainerFocused}
+        ? { ...style.inputContainer, ...style.inputContainerFocused }
         : style.inputContainer;
 
     return (
@@ -62,55 +60,56 @@ const OTPComp = (props) => {
     );
   };
   return (
-    <SafeAreaView style={style.container}>
-      <Pressable style={style.inputsContainer} onPress={handleOnPress}>
-        {codeDigitsArray.map(toDigitInput)}
-      </Pressable>
-      <TextInput
-        ref={ref}
-        value={code}
-        // onChangeText={otpValue => otpFilled(otpValue)}
-        onChangeText={otpValue => {
-          if (!isNaN(otpValue) && !otpValue.includes('.') && !otpValue.includes(' ') ) {
-            otpFilled(otpValue)
-          }
-        }}
-        
-        onSubmitEditing={handleOnBlur}
-        keyboardType={'numeric'}
-        returnKeyType="done"
-        textContentType="oneTimeCode"
-        maxLength={CODE_LENGTH}
-        style={style.hiddenCodeInput}
-      />
-    </SafeAreaView>
+    <ScrollView keyboardShouldPersistTaps='never' contentContainerStyle={{alignItems: 'center', height:'100%', width:'100%'}}  >
+      <View style={style.container}>
+        <Pressable style={style.inputsContainer} onPress={handleOnPress}>
+          {codeDigitsArray.map(toDigitInput)}
+        </Pressable>
+        <TextInput
+          ref={ref}
+          value={code}
+          // onChangeText={otpValue => otpFilled(otpValue)}
+          onChangeText={otpValue => {
+            if (!isNaN(otpValue) && !otpValue.includes('.') && !otpValue.includes(' ')) {
+              otpFilled(otpValue)
+            }
+          }}
+
+          onSubmitEditing={handleOnBlur}
+          keyboardType={'numeric'}
+          returnKeyType="done"
+          textContentType="oneTimeCode"
+          maxLength={CODE_LENGTH}
+          style={style.hiddenCodeInput}
+
+
+        />
+      </View>
+    </ScrollView>
   );
 };
 
 const style = StyleSheet.create({
   container: {
-    // flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    //  backgroundColor: 'red',
   },
   inputsContainer: {
     width: '100%',
-    height: 50,
+    height: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     //  backgroundColor: 'yellow',
   },
   inputContainer: {
     borderColor: '#cccccc',
-    // borderWidth: 2,
     borderRadius: 4,
-    padding: 20,
+    width: '15%',
     // backgroundColor: 'yellow',
     paddingTop: 0,
     paddingBottom: 0,
     justifyContent: 'center',
     backgroundColor: '#f4f4f4',
+    alignItems: 'center',
+
   },
   inputContainerFocused: {
     borderColor: 'black',

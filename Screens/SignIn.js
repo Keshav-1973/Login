@@ -18,18 +18,12 @@ import axios from 'axios';
 const SignInComp = () => {
   const [formValues, handleFormValueChange, setFormValues] = formData({
     Email: '',
-    // Password: '',
+     Password: '',
   });
 
-
-  const [password, setPassword] = useState('')
-  const Password = {Password: password}
-  console.log("Password Saved here" , Password);
-
-
   const handleOnPress = () => {
-    axios.post(`https://jsonplaceholder.typicode.com/users`, {objects: [formValues, Password]})
-    .then((res) => {ToastAndroid.show(JSON.stringify(res.data), ToastAndroid.SHORT);console.log("res",res); console.log('res data', res.data)})
+    axios.post(`https://jsonplaceholder.typicode.com/users`, formValues)
+    .then((res) => {ToastAndroid.show(JSON.stringify(res.data), ToastAndroid.SHORT);})
   }
   return (
     <View style={styles.container}>
@@ -80,7 +74,6 @@ const SignInComp = () => {
             formKey="Email"
             handleFormValueChange={handleFormValueChange}
           />
-        
 
           <TextInput
             style={{
@@ -92,7 +85,10 @@ const SignInComp = () => {
               borderRadius: 2,
             }}
             placeholder="Password"
-            onEndEditing={(event) => {setPassword( event.nativeEvent.text)}}
+            // onEndEditing={(event) => {setPassword( event.nativeEvent.text)}}
+            onChangeText={text =>
+              handleFormValueChange("Password", text)
+            }
           />
           <View
             style={{
