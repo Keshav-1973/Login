@@ -1,6 +1,6 @@
 //import liraries
-import React, {Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, ToastAndroid, Pressable } from 'react-native';
 import {
   CustomButton,
   TitleDescView,
@@ -8,66 +8,77 @@ import {
 } from '../src/components/MyComponents';
 import * as Strings from '../src/components/Strings';
 import OTPComp from '../src/components/OTPComp';
+import axios from 'axios';
 
 // create a component
 const Verification = () => {
+
+  const [data, setData] = useState({ OTP: "" });
+  console.log('parent data', data)
+
+  const childToParent = (childData) => {
+
+    setData(prevState => ({
+      ...prevState,
+      OTP: childData
+    }));
+
+  }
+
+
+
+  const handleOnPress = () => {
+
+    axios.post(`https://jsonplaceholder.typicode.com/users`, data)
+      .then((res) => { ToastAndroid.show(JSON.stringify(res.data), ToastAndroid.SHORT); console.log("res", res); console.log('res data', res.data) })
+  }
+
   return (
     <View style={styles.container}>
-      <View style={{height: '5%'}}></View>
       <View
         style={{
-          // flex: 1,
-          height: '15%',
-          width: '100%',
+          flex: 1,
           // backgroundColor: 'green',
-          alignItems: 'center',
-          justifyContent: 'center',
+           alignItems: 'center',
+          justifyContent:"flex-end"
         }}>
-        <View
-          style={{
-            flex: 1,
-            // backgroundColor: 'red',
-            //width: '50%',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-            // marginVertical: '6%',
-          }}>
-          <TitleView Text={Strings.VERIFY_YOUR_EMAIL} />
-        </View>
-        <View
-          style={{
-            flex: 1,
-            //  backgroundColor: 'yellow',
-            width: '80%',
-            alignItems: 'center',
-            justifyContent: 'center',
-            // flexShrink: 1,
-          }}>
+       
+          <TitleView  Style={{marginBottom:10}} Text={Strings.VERIFY_YOUR_EMAIL} />
+        
           <TitleDescView
             Text={
               Strings.FOR_SECURITY_REASONS_WE_HAVE_SENT_YOU_A_6_DIGIT_PASSWORD_ON_YOUR_EMAIL_ADDRESS
             }
           />
-        </View>
       </View>
       <View
         style={{
           width: '100%',
-
           alignItems: 'center',
-          flex: 2,
-          marginTop: '20%',
+          flex: 3,
+          // backgroundColor: 'pink'
         }}>
         <View
           style={{
-            //  backgroundColor: 'violet',
-            width: '90%',
-            height: '100%',
+            width:'90%'
           }}>
           <View
             style={{
-              justifyContent: 'flex-end',
+                // backgroundColor: 'yellow'
             }}>
+            <View style={{
+              flexDirection: 'row',
+              justifyContent:'space-between',
+              //  backgroundColor:'red', 
+              marginBottom:50,
+              marginTop:20
+
+            }}>
+              <Text style={{ color: 'black' }}>harison.kaleb@gmail.com</Text>
+              <Pressable onPress={() => { console.log("CHANGE") }} ><Text style={{color: 'red', fontFamily: 'Muli-Bold', fontSize: 16}} >{Strings.CHANGE} </Text></Pressable>
+            </View>
+
+
             <Text
               style={{
                 fontFamily: 'Muli-Bold',
@@ -79,22 +90,32 @@ const Verification = () => {
           </View>
           <View
             style={{
-              //    backgroundColor: 'green',
-              height: '25%',
+              // backgroundColor: 'green',
+              height: 50,
+              width: '100%',
               alignItems: 'flex-start',
             }}>
-            {/* <OtpComp /> */}
-            <OTPComp />
+            <OTPComp childToParent={childToParent} />
           </View>
           <View
             style={{
               height: '20%',
               //  backgroundColor: 'yellow',
-              marginTop: 20,
+              marginTop: 40,
             }}>
-            <Text style={{fontFamily: 'Muli'}}>
+            <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-between', }}>
+              <Text style={{ fontFamily: 'Muli-Bold', color: 'black', alignSelf: 'flex-start' }}>
+                {
+                  Strings.DIDNT_RECIEVE_THE_EMAIL
+                }
+              </Text>
+              <Pressable onPress={() => { console.log('RESEND') }}  >
+                <Text style={{ color: 'red', fontFamily: 'Muli-Bold', fontSize: 16 }}> {Strings.RESEND} </Text>
+              </Pressable>
+            </View>
+            <Text style={{ fontFamily: 'Muli' }}>
               {
-                Strings.DIDNT_RECIEVE_THE_EMAIL_DONT_FORGET_TO_CHECK_YOUR_SPAM_FOLDER
+                Strings.PLEASE_CHECK_YOUR_SPAM_FOLDER_IF_NOT_RECEIVED_THEN_TAP_RESEND
               }
             </Text>
           </View>
@@ -106,18 +127,12 @@ const Verification = () => {
               Text={Strings.CONTINUE}
               btnColor="black"
               txtColor="white"
+              handleOnPress={handleOnPress}
             />
           </View>
         </View>
       </View>
-      <View
-        style={{
-          // height: '20%',
-          width: '93%',
-          // backgroundColor: 'yellow',
-          alignItems: 'center',
-          flex: 1,
-        }}></View>
+     
     </View>
   );
 };
@@ -126,8 +141,7 @@ const Verification = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+ 
     backgroundColor: 'white',
   },
 });

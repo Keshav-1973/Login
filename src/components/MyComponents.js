@@ -5,8 +5,6 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  Modal,
-  Pressable,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -16,7 +14,7 @@ import * as Strings from '../components/Strings';
 /***========================== Title View =========================== */
 
 export const TitleView = props => (
-  <View>
+  <View style={props.Style} > 
     <Text
       style={{
         fontSize: 18,
@@ -66,11 +64,10 @@ export const FormField = props => {
 /***========================== Custom Button =========================== */
 
 export const CustomButton = props => {
-  const navigation = useNavigation();
-
+// console.log(props);
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate(props.screenName)}
+      onPress={props.handleOnPress}
       style={{
         alignItems: 'center',
         backgroundColor: props.btnColor,
@@ -147,62 +144,62 @@ export const CustomCheckBox = () => {
 
 /***==========================  Button With Modal =========================== */
 
-export const ModalButton = props => {
-  const [modalVisible, setModalVisible] = useState(false);
+// export const ModalButton = props => {
+//   const [modalVisible, setModalVisible] = useState(false);
 
-  const navigation = useNavigation();
+//   const navigation = useNavigation();
 
-  return (
-    <>
-      <TouchableOpacity
-        onPress={() => {
-          setModalVisible(props.handleOnPress);
-        }}
-        style={{
-          alignItems: 'center',
-          backgroundColor: props.btnColor,
-          padding: 15,
-          width: '100%',
-          borderRadius: 5,
-          justifyContent: 'center',
-          borderWidth: 2,
-        }}>
-        <Text
-          style={{
-            color: props.txtColor,
-            fontFamily: 'Muli-Bold',
-            fontSize: 15,
-          }}>
-          {props.Text}
-        </Text>
-      </TouchableOpacity>
-      <Modal animationType="slide" transparent={true} visible={modalVisible}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>{Strings.PASSWORD_SENT}</Text>
-            <View style={{}}>
-              <Text
-                style={{
-                  fontFamily: 'Muli',
-                }}>
-                {Strings.We_Have_Sent_A_6_Digit_Password_On_Your_Email_ID}{' '}
-              </Text>
-              <Text>{Strings.EMAIL}</Text>
-            </View>
-            <Pressable
-              style={styles.button}
-              onPress={() => {
-                navigation.navigate(props.screenName);
-                setModalVisible(!modalVisible);
-              }}>
-              <Text style={styles.textStyle}>{Strings.OK}</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
-    </>
-  );
-};
+//   return (
+//     <>
+//       <TouchableOpacity
+//         onPress={() => {
+//           setModalVisible(props.handleOnPress);
+//         }}
+//         style={{
+//           alignItems: 'center',
+//           backgroundColor: props.btnColor,
+//           padding: 15,
+//           width: '100%',
+//           borderRadius: 5,
+//           justifyContent: 'center',
+//           borderWidth: 2,
+//         }}>
+//         <Text
+//           style={{
+//             color: props.txtColor,
+//             fontFamily: 'Muli-Bold',
+//             fontSize: 15,
+//           }}>
+//           {props.Text}
+//         </Text>
+//       </TouchableOpacity>
+//       <Modal animationType="fade" transparent={true} visible={modalVisible}>
+//         <View style={styles.centeredView}>
+//           <View style={styles.modalView}>
+//             <Text style={styles.modalText}>{Strings.PASSWORD_SENT}</Text>
+//             <View style={{}}>
+//               <Text
+//                 style={{
+//                   fontFamily: 'Muli',
+//                 }}>
+//                 {Strings.We_Have_Sent_A_6_Digit_Password_On_Your_Email_ID}{' '}
+//               </Text>
+//               <Text>{Strings.EMAIL}</Text>
+//             </View>
+//             <Pressable
+//               style={styles.button}
+//               onPress={() => {
+//                 navigation.navigate(props.screenName);
+//                 setModalVisible(!modalVisible);
+//               }}>
+//               <Text style={styles.textStyle}>{Strings.OK}</Text>
+//             </Pressable>
+//           </View>
+//         </View>
+//       </Modal>
+//     </>
+//   );
+// };
 
 /***==========================  Component Styles =========================== */
 
@@ -245,7 +242,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   formFieldWrapper: {
-    backgroundColor: '#d6d6d6',
+    backgroundColor: '#e3e3e3',
     width: '100%',
     height: 60,
     borderBottomWidth: 1,

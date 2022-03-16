@@ -6,29 +6,39 @@ import {
   View,
   TextInput,
   Pressable,
+  Keyboard,
 } from 'react-native';
-import {number} from 'yargs';
 
 const CODE_LENGTH = 6;
-
-const OTPComp = () => {
-  console.log(code);
-
+const OTPComp = (props) => {
   const [code, setCode] = useState('');
   const [containerIsFocused, setContainerIsFocused] = useState(false);
-
   const codeDigitsArray = new Array(CODE_LENGTH).fill(0);
+  console.log(codeDigitsArray)
+
+
+
+ const otpFilled = otpValue => {
+   console.log(otpValue)
+    setCode(otpValue);
+    props.childToParent(otpValue);
+ }
+
+
+ 
 
   const ref = useRef(null);
 
   const handleOnPress = () => {
     setContainerIsFocused(true);
-    ref?.current?.focus();
+    ref.current.focus();
   };
 
   const handleOnBlur = () => {
     setContainerIsFocused(false);
   };
+  // Keyboard.addListener('keyboardDidShow', Keyboard.dismiss());
+  // console.log(Keyboard);
 
   const toDigitInput = (_value, idx) => {
     const emptyInputChar = ' ';
@@ -44,7 +54,6 @@ const OTPComp = () => {
       containerIsFocused && isFocused
         ? {...style.inputContainer, ...style.inputContainerFocused}
         : style.inputContainer;
-    // console.log(containerIsFocused, isFocused);
 
     return (
       <View key={idx} style={containerStyle}>
@@ -60,9 +69,15 @@ const OTPComp = () => {
       <TextInput
         ref={ref}
         value={code}
-        onChangeText={setCode}
+        // onChangeText={otpValue => otpFilled(otpValue)}
+        onChangeText={otpValue => {
+          if (!isNaN(otpValue) && !otpValue.includes('.') && !otpValue.includes(' ') ) {
+            otpFilled(otpValue)
+          }
+        }}
+        
         onSubmitEditing={handleOnBlur}
-        keyboardType="number-pad"
+        keyboardType={'numeric'}
         returnKeyType="done"
         textContentType="oneTimeCode"
         maxLength={CODE_LENGTH}
@@ -74,17 +89,17 @@ const OTPComp = () => {
 
 const style = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor: 'pink',
+    //  backgroundColor: 'red',
   },
   inputsContainer: {
     width: '100%',
     height: 50,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // backgroundColor: 'yellow',
+    //  backgroundColor: 'yellow',
   },
   inputContainer: {
     borderColor: '#cccccc',
@@ -96,19 +111,20 @@ const style = StyleSheet.create({
     paddingBottom: 0,
     justifyContent: 'center',
     backgroundColor: '#f4f4f4',
-    borderBottomWidth: 2,
   },
   inputContainerFocused: {
-    borderColor: '#0f5181',
+    borderColor: 'black',
+    borderBottomWidth: 2,
+    backgroundColor: '#d9d9d9',
   },
   inputText: {
     fontSize: 24,
-    fontFamily: 'Menlo-Regular',
+    fontFamily: 'Muli',
   },
   hiddenCodeInput: {
     position: 'absolute',
-    height: 50,
-    width: '100%',
+    height: 0,
+    width: 0,
     opacity: 0,
     // backgroundColor: 'red',
     left: 0,

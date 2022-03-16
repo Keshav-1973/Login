@@ -20,12 +20,14 @@ export const We_Have_Sent_A_6_Digit_Password_On_Your_Email_ID =
 export const OK = 'OK';
 export const VERIFY_YOUR_EMAIL = 'Verify your email';
 export const FOR_SECURITY_REASONS_WE_HAVE_SENT_YOU_A_6_DIGIT_PASSWORD_ON_YOUR_EMAIL_ADDRESS =
-  'For security reasons, we have sent you a 6 digit passsword on your email address';
+  'For security reasons, we have sent you a\n 6 digit passsword on your email address';
 export const ENTER_CODE = 'Enter Code';
-export const DIDNT_RECIEVE_THE_EMAIL_DONT_FORGET_TO_CHECK_YOUR_SPAM_FOLDER =
-  " Didn't recieve the email? Dont forget to check your spam folder";
+export const DIDNT_RECIEVE_THE_EMAIL =
+  " Didn't recieve the email?";
+export const PLEASE_CHECK_YOUR_SPAM_FOLDER_IF_NOT_RECEIVED_THEN_TAP_RESEND = `Please check your spam folder. If not received then tap "Resend" `
 export const CONTINUE = 'Continue';
-
+export const CHANGE = "Change";
+export const RESEND = "Resend";
 export const SIGN_IN = 'Sign In';
 export const ENTER_YOUR_REGISTERED_EMAIL_ID_WITH_APP_NAME_TO_LOGIN =
   'Enter your registered email ID with app name to login';

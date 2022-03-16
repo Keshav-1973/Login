@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {TextInput} from 'react-native-gesture-handler';
+import {View, Text, StyleSheet, TextInput, ToastAndroid} from 'react-native';
 import {
   TitleView,
   TitleDescView,
@@ -11,14 +10,27 @@ import {
 } from '../src/components/MyComponents';
 import {formData} from '../src/components/formdata';
 import * as Strings from '../src/components/Strings';
+import axios from 'axios';
+
+
+
 // create a component
 const SignInComp = () => {
   const [formValues, handleFormValueChange, setFormValues] = formData({
     Email: '',
-    Password: '',
+    // Password: '',
   });
-  console.log(formValues);
 
+
+  const [password, setPassword] = useState('')
+  const Password = {Password: password}
+  console.log("Password Saved here" , Password);
+
+
+  const handleOnPress = () => {
+    axios.post(`https://jsonplaceholder.typicode.com/users`, {objects: [formValues, Password]})
+    .then((res) => {ToastAndroid.show(JSON.stringify(res.data), ToastAndroid.SHORT);console.log("res",res); console.log('res data', res.data)})
+  }
   return (
     <View style={styles.container}>
       <View
@@ -68,13 +80,9 @@ const SignInComp = () => {
             formKey="Email"
             handleFormValueChange={handleFormValueChange}
           />
-          <FormField
-            formKey="Password"
-            placeholder="Password"
-            handleFormValueChange={handleFormValueChange}
-          />
+        
 
-          {/* <TextInput
+          <TextInput
             style={{
               backgroundColor: '#e3e3e3',
               width: '100%',
@@ -84,7 +92,8 @@ const SignInComp = () => {
               borderRadius: 2,
             }}
             placeholder="Password"
-          /> */}
+            onEndEditing={(event) => {setPassword( event.nativeEvent.text)}}
+          />
           <View
             style={{
               flexDirection: 'row',
@@ -106,7 +115,7 @@ const SignInComp = () => {
           width: '93%',
           marginTop: 30,
         }}>
-        <CustomButton Text="Next" btnColor="black" txtColor="white" />
+        <CustomButton Text={Strings.NEXT} btnColor="black" txtColor="white" handleOnPress={handleOnPress} />
       </View>
     </View>
   );
