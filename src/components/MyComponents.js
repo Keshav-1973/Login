@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -6,21 +6,20 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import CheckBox from '@react-native-community/checkbox';
-import * as Strings from '../components/Strings';
-
+import Colors from '../styles/Colors'
 /***========================== Title View =========================== */
 
 export const TitleView = props => (
-  <View style={props.Style} > 
+  <View style={props.Style} >
     <Text
       style={{
         fontSize: 18,
         // fontWeight: props.fntWeight,
         fontFamily: 'Muli-Bold',
-        color: 'black',
+        color: Colors.TEXT_PRIMARY,
       }}>
       {props.Text}
     </Text>
@@ -30,13 +29,14 @@ export const TitleView = props => (
 /***========================== Titles Description View =========================== */
 
 export const TitleDescView = props => (
-  <View>
+  <View style={props.Style} >
     <Text
       style={{
         fontSize: 15,
         fontWeight: props.fntWeight,
         textAlign: 'center',
         fontFamily: 'Muli',
+        color: Colors.TEXT_SECONDARY
       }}>
       {props.Text}
     </Text>
@@ -64,7 +64,7 @@ export const FormField = props => {
 /***========================== Custom Button =========================== */
 
 export const CustomButton = props => {
-// console.log(props);
+  // console.log(props);
   return (
     <TouchableOpacity
       onPress={props.handleOnPress}
@@ -78,7 +78,7 @@ export const CustomButton = props => {
         borderWidth: 2,
       }}>
       <Text
-        style={{color: props.txtColor, fontFamily: 'Muli-Bold', fontSize: 15}}>
+        style={{ color: props.txtColor, fontFamily: 'Muli-Bold', fontSize: 15 }}>
         {props.Text}
       </Text>
     </TouchableOpacity>
@@ -91,8 +91,8 @@ export const DropDownMenu = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
-    {label: 'User', value: 'User'},
-    {label: 'Banana', value: 'banana'},
+    { label: 'User', value: 'User' },
+    { label: 'Banana', value: 'banana' },
   ]);
   return (
     <DropDownPicker
@@ -134,7 +134,7 @@ export const CustomCheckBox = () => {
   return (
     <CheckBox
       onFillColor="black"
-      tintColors={{true: 'black'}}
+      tintColors={{ true: 'black' }}
       disabled={false}
       value={toggleCheckBox}
       onValueChange={newValue => setToggleCheckBox(newValue)}
@@ -200,6 +200,53 @@ export const CustomCheckBox = () => {
 //     </>
 //   );
 // };
+
+
+/***==========================  CheckBox with Button =========================== */
+export const ChecBoxkButton = (props) => {
+
+  const [toggleCheckBox, setToggleCheckBox] = useState(false);
+  const [termAccepted, setTermAccepted] = useState(false);
+  return (
+  
+  <View style={{ flex:1, }} >
+    <CheckBox onFillColor="black"
+      tintColors={{ true: 'black' }}
+      disabled={false}
+      value={toggleCheckBox}
+      onChange={() => setToggleCheckBox(!toggleCheckBox)}
+      onValueChange={newValue => setTermAccepted(newValue)}
+      style={{marginBottom:props.marginBottom,marginTop:props.marginTop ,  }}
+     
+    />
+    <TouchableOpacity
+      onPress={props.handleOnPress}
+      disabled={!termAccepted}
+      style={{
+        alignItems: 'center',
+        backgroundColor: termAccepted
+          ? "#000000"
+          : "#ababab",
+        padding: 15,
+        width: '100%',
+        borderRadius: 5,
+        justifyContent: 'center',
+        height:50, 
+      }}>
+      <Text
+        style={{
+          color: termAccepted
+            ? "#fff"
+            : "#797979", fontFamily: 'Muli-Bold',
+            fontSize: 15
+        }}>
+        {props.BtnText}
+      </Text>
+    </TouchableOpacity>
+  </View>)
+}
+
+
 
 /***==========================  Component Styles =========================== */
 

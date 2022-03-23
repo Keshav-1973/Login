@@ -6,9 +6,11 @@ import {
   TitleDescView,
   TitleView,
 } from '../src/components/MyComponents';
-import * as Strings from '../src/components/Strings';
 import OTPComp from '../src/components/OTPComp';
 import axios from 'axios';
+import Strings from '../src/components/Strings';
+import Colors from '../src/styles/Colors';
+import Styles from "../src/styles/Styles"
 
 // create a component
 const Verification = () => {
@@ -74,16 +76,17 @@ const Verification = () => {
               marginTop:20
 
             }}>
-              <Text style={{ color: 'black' }}>harison.kaleb@gmail.com</Text>
-              <Pressable onPress={() => { console.log("CHANGE") }} ><Text style={{color: 'red', fontFamily: 'Muli-Bold', fontSize: 16}} >{Strings.CHANGE} </Text></Pressable>
+              <Text style={{ color: Colors.TEXT_PRIMARY }}>harison.kaleb@gmail.com</Text>
+              <Pressable onPress={() => { console.log("CHANGE") }} ><Text style={[{color: 'red', fontFamily: 'Muli-Bold'}, Styles.xxlargeBold]} >{Strings.CHANGE} </Text></Pressable>
             </View>
 
 
             <Text
-              style={{
+              style={[{
                 fontFamily: 'Muli-Bold',
                 fontSize: 15,
-              }}>
+                color: Colors.TEXT_SECONDARY
+              }, Styles.xlarge]}>
               {Strings.ENTER_CODE}
             </Text>
           </View>
@@ -108,7 +111,7 @@ const Verification = () => {
                 }
               </Text>
               <Pressable onPress={() => { console.log('RESEND') }}  >
-                <Text style={{ color: 'red', fontFamily: 'Muli-Bold', fontSize: 16 }}> {Strings.RESEND} </Text>
+                <Text style={[{ color: 'red', fontFamily: 'Muli-Bold',  }, Styles.xxlargeBold]}> {Strings.RESEND} </Text>
               </Pressable>
             </View>
             <Text style={{ fontFamily: 'Muli' }}>
@@ -139,7 +142,6 @@ const Verification = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
- 
     backgroundColor: 'white',
   },
 });

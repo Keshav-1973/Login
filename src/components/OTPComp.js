@@ -9,6 +9,7 @@ import {
   Keyboard,
   ScrollView
 } from 'react-native';
+import Colors from '../styles/Colors';
 
 const CODE_LENGTH = 6;
 const OTPComp = (props) => {
@@ -119,6 +120,7 @@ const style = StyleSheet.create({
   inputText: {
     fontSize: 24,
     fontFamily: 'Muli',
+    color: Colors.TEXT_SECONDARY
   },
   hiddenCodeInput: {
     position: 'absolute',
